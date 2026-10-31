@@ -56,7 +56,7 @@ const ThemeManager = {
 // Provides real-time read/write to SQLite database file
 // ====================================================================
 const SqliteClient = {
-  BASE_URL: 'http://127.0.0.1:5000/api',
+  BASE_URL: (window.location.protocol.startsWith('http')) ? '/api' : 'http://127.0.0.1:5000/api',
   isOnline: false,
   isChecking: false,
 
@@ -90,7 +90,7 @@ const SqliteClient = {
       if (online) {
         b.className = 'sqlite-status-badge inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 shadow-2xs';
         b.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span><span>SQLite: Connected (${dbName})</span>`;
-        b.title = `Connected to SQLite Database: ${dbName} on http://127.0.0.1:5000`;
+        b.title = `Connected to SQLite Database: ${dbName}`;
       } else {
         b.className = 'sqlite-status-badge inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 shadow-2xs';
         b.innerHTML = `<span class="w-2 h-2 rounded-full bg-slate-400"></span><span>SQLite: Local Cache</span>`;
